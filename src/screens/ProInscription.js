@@ -8,10 +8,10 @@ import {
   ScrollView,
   Dimensions,
 } from "react-native";
-import Theme from "./../../../theme";
-import { Button, Header, Input } from "./../../components";
+import Theme from "./../../theme";
+import { Button, Header, Input } from "./../components";
 const screen = Dimensions.get("window");
-let ProInscription = (props) => {
+let ProInscription = ({navigation}) => {
   let [name, setName] = useState("");
   let [number, setNumber] = useState("");
   let [address, setAddress] = useState("");
@@ -28,7 +28,7 @@ let ProInscription = (props) => {
       />
       <Header
         headerTitle="Inscription"
-        backHandler={() => props.navigation.goBack()}
+        backHandler={() => navigation.goBack()}
       />
       <View style={styles._data_main}>
         <ScrollView showsVerticalScrollIndicator={false}>
@@ -72,7 +72,7 @@ let ProInscription = (props) => {
               buttonText="Choisir"
               borderWidth="100%"
               buttonHandler={() =>
-                props.navigation.navigate("ProInscriptionphotos")
+                navigation.navigate("ProInscriptionphotos")
               }
             />
           </View>

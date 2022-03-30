@@ -9,11 +9,28 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import Theme from "./../../../theme";
-import { Button, Header } from "./../../components";
-import { AddIcon } from "./../../svg";
+import Theme from "./../../theme";
+import { Button, Header } from "./../components";
+import { AddIcon } from "./../svg";
 const screen = Dimensions.get("window");
-let ProInscriptionphotos = (props) => {
+import * as ImagePicker from "expo-image-picker";
+let ProInscriptionphotos = ({ navigation }) => {
+  const [image, setImage] = useState(null);
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    console.log(result);
+
+    if (!result.cancelled) {
+      setImage(result.uri);
+    }
+  };
   return (
     <SafeAreaView style={styles._container}>
       <StatusBar
@@ -24,7 +41,7 @@ let ProInscriptionphotos = (props) => {
       />
       <Header
         headerTitle="Inscription"
-        backHandler={() => props.navigation.goBack()}
+        backHandler={() => navigation.goBack()}
       />
       <View style={styles._steps_main}>
         <View style={styles._active_step} />
@@ -38,26 +55,29 @@ let ProInscriptionphotos = (props) => {
             Ajoutez une ou plusieurs photos de votre entreprise
           </Text>
         </View>
-        <TouchableOpacity style={styles._upload_btn_main}>
-          <AddIcon />
-        </TouchableOpacity>
-        {/* <View>
-            <TouchableOpacity>
-          <Image
-            source={{
-              uri: "https://image.shutterstock.com/image-vector/avatar-profile-icon-set-including-600w-415795456.jpg",
-            }}
-            style={styles._profile_main_img}
-          />
+        {image === null ? (
+          <TouchableOpacity style={styles._upload_btn_main} onPress={pickImage}>
+            <AddIcon />
+          </TouchableOpacity>
+        ) : (
+          <View>
+            <TouchableOpacity style={styles._upload_img_main}>
+              <Image
+                source={{
+                  uri: image,
+                }}
+                style={styles._profile_main_img}
+              />
             </TouchableOpacity>
-        </View> */}
+          </View>
+        )}
         <Button
-          buttonColor={"#919191"}
+          buttonColor={image === null ? "#919191" : Theme.secondry}
           buttonText="Valider"
           borderWidth="100%"
-          buttonDisable={true}
+          buttonDisable={image === null ? true : false}
           //   buttonHandler={() =>
-          //     props.navigation.navigate("ProInscriptionphotos")
+          //     navigation.navigate("ProInscriptionphotos")
           //   }
         />
       </View>
@@ -117,12 +137,22 @@ let styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  _profile_main_img:{
+  _profile_main_img: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 100,
+  },
+  _upload_img_main: {
     width: 195,
     height: 195,
+    backgroundColor: Theme.gray,
     borderRadius: 195 / 2,
-    borderWidth:5,
+    alignSelf: "center",
     elevation: 5,
-  }
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 5,
+    borderColor: Theme.white,
+  },
 });
 export default ProInscriptionphotos;

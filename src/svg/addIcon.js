@@ -1,6 +1,5 @@
 import * as React from "react"
 import Svg, { G, Circle, Path } from "react-native-svg"
-
 const AddIcon = (props) => (
   <Svg xmlns="http://www.w3.org/2000/svg" width={71} height={71} {...props}>
     <G data-name="Group 160" transform="translate(-172 -356)">

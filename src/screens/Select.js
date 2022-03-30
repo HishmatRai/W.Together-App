@@ -1,9 +1,17 @@
 import React from "react";
-import { SafeAreaView, Text, StatusBar, StyleSheet, View } from "react-native";
-import Theme from "./../../../theme";
-import { SelectImage } from "./../../svg";
-import { Button } from "./../../components";
-let Select = (props) => {
+import {
+  SafeAreaView,
+  Text,
+  StatusBar,
+  StyleSheet,
+  View,
+  Dimensions,
+} from "react-native";
+import Theme from "./../../theme";
+import { SelectImage, SelectSmallImage } from "./../svg";
+import { Button } from "./../components";
+const screen = Dimensions.get("window");
+let Select = ({navigation}) => {
   return (
     <SafeAreaView style={styles._container}>
       <StatusBar
@@ -14,7 +22,7 @@ let Select = (props) => {
       />
       <View style={styles._data_main}>
         <View style={styles._img_main}>
-          <SelectImage />
+          {screen.width <= 380 ? <SelectSmallImage /> : <SelectImage />}
         </View>
         <View style={styles._heading_main}>
           <Text style={styles._heading}>Bienvenue</Text>
@@ -29,7 +37,7 @@ let Select = (props) => {
             buttonText="Inscription"
             borderWidth="100%"
             buttonHandler={() =>
-              props.navigation.navigate("InscriptionParticulier")
+              navigation.navigate("InscriptionParticulier")
             }
           />
           <Button
@@ -58,17 +66,20 @@ let styles = StyleSheet.create({
     fontSize: 35,
     color: Theme.primary,
     fontFamily: Theme.bold,
+    lineHeight: 45,
   },
   _sub_heading: {
     fontSize: 35,
     color: Theme.primary,
     fontFamily: Theme.bold,
+    lineHeight: 45,
   },
   _title: {
     fontSize: 35,
     color: Theme.secondry,
     fontFamily: Theme.bold,
     marginLeft: 5,
+    lineHeight: 45,
   },
   _sub_heading_main: {
     flexDirection: "row",

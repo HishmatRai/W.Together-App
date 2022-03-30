@@ -1,9 +1,20 @@
 import React from "react";
-import { SafeAreaView, Text, StatusBar, StyleSheet, View } from "react-native";
-import Theme from "./../../../theme";
-import { InscriptionParticulierImage } from "./../../svg";
-import { Button, Header } from "./../../components";
-let InscriptionParticulier = (props) => {
+import {
+  SafeAreaView,
+  Text,
+  StatusBar,
+  StyleSheet,
+  View,
+  Dimensions,
+} from "react-native";
+import Theme from "./../../theme";
+import {
+  InscriptionParticulierImage2,
+  InscriptionParticulierSmallImage2,
+} from "./../svg";
+import { Button, Header } from "./../components";
+const screen = Dimensions.get("window");
+let InscriptionParticulier2 = ({ navigation }) => {
   return (
     <SafeAreaView style={styles._container}>
       <StatusBar
@@ -14,30 +25,32 @@ let InscriptionParticulier = (props) => {
       />
       <Header
         headerTitle="Inscription"
-        backHandler={() => props.navigation.goBack()}
+        backHandler={() => navigation.goBack()}
       />
       <View style={styles._data_main}>
         <View>
           <Text style={styles._heading}>Je suis ...</Text>
           <View style={styles._img_main}>
-            <InscriptionParticulierImage />
+            {screen.width <= 380 ? (
+              <InscriptionParticulierSmallImage2 />
+            ) : (
+              <InscriptionParticulierImage2 />
+            )}
           </View>
         </View>
         <View style={styles._btn_group}>
           <Button
-            buttonColor={Theme.primary}
+            buttonColor={Theme.white}
             buttonText="Professionnel"
             borderWidth="48%"
-            buttonHandler={() => alert("Comming Soon!")}
+            borderButton={true}
+            buttonHandler={() => navigation.navigate("InscriptionParticulier")}
           />
           <Button
-            buttonColor={Theme.white}
+            buttonColor={Theme.primary}
             buttonText="Particulier"
             borderWidth="48%"
-            borderButton={true}
-            buttonHandler={() =>
-              props.navigation.navigate("InscriptionParticulier2")
-            }
+            buttonHandler={() => alert("Comming Soon!")}
           />
         </View>
         <View>
@@ -45,7 +58,9 @@ let InscriptionParticulier = (props) => {
             buttonColor={Theme.secondry}
             buttonText="Choisir"
             borderWidth="100%"
-            buttonHandler={() => props.navigation.navigate("ProInscription")}
+            buttonHandler={() =>
+              navigation.navigate("InscriptionParticulierSignup")
+            }
           />
         </View>
       </View>
@@ -80,4 +95,4 @@ let styles = StyleSheet.create({
     justifyContent: "space-between",
   },
 });
-export default InscriptionParticulier;
+export default InscriptionParticulier2;
