@@ -11,7 +11,8 @@ import ProInscriptionphotos from "../screens/ProInscriptionphotos";
 import InscriptionParticulierSignup from "../screens/InscriptionParticulierSignup";
 import InscriptionPhotoParticulier from "../screens/InscriptionPhotoParticulier";
 import InscriptionParticulierSecurite from "../screens/InscriptionParticulierSecurite";
-import InscriptionParticulierSecuriteCard from './../screens/InscriptionParticulierSecuriteCard'
+import InscriptionParticulierSecuriteCard from "./../screens/InscriptionParticulierSecuriteCard";
+import Tuto from "../screens/Tuto";
 const Stack = createNativeStackNavigator();
 function Navigation() {
   return (
@@ -47,19 +48,24 @@ function Navigation() {
           component={InscriptionParticulierSignup}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="InscriptionPhotoParticulier"
           component={InscriptionPhotoParticulier}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="InscriptionParticulierSecurite"
           component={InscriptionParticulierSecurite}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="InscriptionParticulierSecuriteCard"
           component={InscriptionParticulierSecuriteCard}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Tuto"
+          component={Tuto}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

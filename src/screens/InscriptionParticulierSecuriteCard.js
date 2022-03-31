@@ -7,15 +7,33 @@ import {
   View,
   Dimensions,
   TouchableOpacity,
+  ScrollView,
 } from "react-native";
 import Theme from "./../../theme";
 import { Button, Header } from "./../components";
 const screen = Dimensions.get("window");
+import { Card1Icon, Card2Icon, Card3Icon, Card4Icon } from "./../svg";
 let InscriptionParticulierSecuriteCard = ({ navigation }) => {
   let CardData = [
     {
       title: "Sortie",
-      
+      icon: <Card1Icon />,
+      bgColor: Theme.primary,
+    },
+    {
+      title: "Culture",
+      icon: <Card2Icon />,
+      bgColor: "#F3F3F3",
+    },
+    {
+      title: "Sport",
+      icon: <Card3Icon />,
+      bgColor: Theme.primary,
+    },
+    {
+      title: "Carritatif",
+      icon: <Card4Icon />,
+      bgColor: "#F3F3F3",
     },
   ];
   return (
@@ -44,13 +62,32 @@ let InscriptionParticulierSecuriteCard = ({ navigation }) => {
             avec les autres utilisateurs.
           </Text>
         </View>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles._card_main}>
+            {CardData.map((v, i) => {
+              return (
+                <TouchableOpacity key={i} style={styles._card}>
+                  <View
+                    style={[
+                      styles._card_icon_main,
+                      { backgroundColor: v.bgColor },
+                    ]}
+                  >
+                    {v.icon}
+                  </View>
+                  <Text style={styles._card_title}>{v.title}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        </ScrollView>
+      </View>
+      <View style={styles._btn_main}>
         <Button
           buttonColor={Theme.secondry}
           buttonText="Envoyer"
           borderWidth="100%"
-          //   buttonHandler={() =>
-          //     navigation.navigate("ProInscriptionphotos")
-          //   }
+          buttonHandler={() => navigation.navigate("Tuto")}
         />
       </View>
     </SafeAreaView>
@@ -64,7 +101,6 @@ let styles = StyleSheet.create({
   _data_main: {
     margin: 20,
     flex: 1,
-    justifyContent: "space-between",
     marginTop: screen.width * 0.2,
   },
   _heading: {
@@ -98,6 +134,32 @@ let styles = StyleSheet.create({
     fontFamily: Theme.regular,
     color: Theme.secondry,
     textAlign: "center",
+  },
+  _card_icon_main: {
+    width: "100%",
+    borderRadius: 10,
+    height: 163,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  _card_title: {
+    fontSize: 15,
+    fontFamily: Theme.regular,
+    textAlign: "center",
+    color: "#919191",
+    marginTop: 10,
+  },
+  _card: {
+    width: "48%",
+    marginTop: 10,
+  },
+  _card_main: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+  },
+  _btn_main: {
+    padding: 20,
   },
 });
 export default InscriptionParticulierSecuriteCard;
