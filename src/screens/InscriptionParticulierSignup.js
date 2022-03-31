@@ -18,13 +18,12 @@ const screen = Dimensions.get("window");
 let InscriptionParticulierSignup = ({ navigation }) => {
   let [name, setName] = useState("");
   let [number, setNumber] = useState("");
-  let [address, setAddress] = useState("");
   let [email, setEmail] = useState("");
   let [hidePasword, setHidePassword] = useState(true);
   let [password, setPassword] = useState("");
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   let [selecteDate, setSelectDate] = useState("");
-
+  let [gender, setGender] = useState("Homme");
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -55,6 +54,7 @@ let InscriptionParticulierSignup = ({ navigation }) => {
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={styles._steps_main}>
             <View style={styles._active_step} />
+            <View style={styles._step} />
             <View style={styles._step} />
             <View style={styles._step} />
           </View>
@@ -111,6 +111,42 @@ let InscriptionParticulierSignup = ({ navigation }) => {
               onCancel={hideDatePicker}
             />
           </TouchableOpacity>
+
+          <Text style={[styles._title, { color: Theme.secondry }]}>Tu es</Text>
+          <View style={styles._btn_group}>
+            <TouchableOpacity
+              style={
+                gender === "Femme" ? styles._active_btn_main : styles._btn_main
+              }
+              onPress={() => setGender("Femme")}
+            >
+              <Text
+                style={
+                  gender === "Femme"
+                    ? styles._active_btn_text
+                    : styles._btn_text
+                }
+              >
+                Femme
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={
+                gender === "Homme" ? styles._active_btn_main : styles._btn_main
+              }
+              onPress={() => setGender("Homme")}
+            >
+              <Text
+                style={
+                  gender === "Homme"
+                    ? styles._active_btn_text
+                    : styles._btn_text
+                }
+              >
+                Homme
+              </Text>
+            </TouchableOpacity>
+          </View>
           <Input
             value={email}
             onChangeText={(email) => setEmail(email)}
@@ -124,12 +160,14 @@ let InscriptionParticulierSignup = ({ navigation }) => {
             hideShowPassword={() => setHidePassword(!hidePasword)}
             showPassowrd={hidePasword}
           />
-          <View style={styles._btn_main}>
+          <View style={styles._signup_btn_main}>
             <Button
               buttonColor={Theme.secondry}
               buttonText="Suivant"
               borderWidth="100%"
-              //   buttonHandler={() => navigation.navigate("ProInscriptionphotos")}
+              buttonHandler={() =>
+                navigation.navigate("InscriptionPhotoParticulier")
+              }
             />
           </View>
           <View style={{ paddingBottom: 100 }} />
@@ -157,7 +195,7 @@ let styles = StyleSheet.create({
   _steps_main: {
     flexDirection: "row",
     alignItems: "center",
-    width: "15%",
+    width: "20%",
     justifyContent: "space-between",
     alignSelf: "center",
     marginTop: screen.width * 0.05,
@@ -174,7 +212,7 @@ let styles = StyleSheet.create({
     borderRadius: 8 / 2,
     backgroundColor: Theme.primaryLight,
   },
-  _btn_main: {
+  _signup_btn_main: {
     marginTop: 30,
   },
   _title: {
@@ -198,6 +236,43 @@ let styles = StyleSheet.create({
     color: Theme.secondry,
     fontSize: 15,
     fontFamily: Theme.regular,
+  },
+  _btn_group: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  _active_btn_main: {
+    height: 50,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    borderColor: Theme.primary,
+    backgroundColor: Theme.primary,
+    width: "48%",
+    borderWidth: 1,
+  },
+  _active_btn_text: {
+    fontSize: 16,
+    fontFamily: Theme.regular,
+    color: Theme.white,
+  },
+  _btn_main: {
+    height: 50,
+    borderRadius: 15,
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 10,
+    borderColor: Theme.primary,
+    backgroundColor: Theme.white,
+    width: "48%",
+    borderWidth: 1,
+  },
+  _btn_text: {
+    fontSize: 16,
+    fontFamily: Theme.regular,
+    color: Theme.primary,
   },
 });
 export default InscriptionParticulierSignup;
