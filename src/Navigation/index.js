@@ -3,15 +3,16 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Dimensions, View, StyleSheet, Text } from "react-native";
-import Theme from './../../theme';
+import Theme from "./../../theme";
+import { TabIcon } from "./../svg";
 import {
   Entypo,
   AntDesign,
   FontAwesome5,
   Feather,
   Octicons,
-  MaterialCommunityIcons  ,
-  Ionicons 
+  MaterialCommunityIcons,
+  Ionicons,
 } from "@expo/vector-icons";
 // Screens
 import Select from "./../screens/Select";
@@ -24,7 +25,13 @@ import InscriptionPhotoParticulier from "../screens/InscriptionPhotoParticulier"
 import InscriptionParticulierSecurite from "../screens/InscriptionParticulierSecurite";
 import InscriptionParticulierSecuriteCard from "./../screens/InscriptionParticulierSecuriteCard";
 import Tuto from "../screens/Tuto";
-import Home from "../screens/Home";
+import HomeStack from "../screens/HomeStack";
+import PostDetails from "../screens/PostDetails";
+import ParametresNotif from "./../screens/ParametresNotif";
+import ModifierProfil from "./../screens/ModifierProfil";
+import Faq from "../screens/Faq";
+import Publier from "./../screens/Publier";
+import AutorisationParticiper from "../screens/AutorisationParticiper";
 const width = Dimensions.get("window").width;
 const tabWidth = width / 5;
 const Stack = createNativeStackNavigator();
@@ -44,8 +51,8 @@ const TabStack = (props) => {
       }}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="HomeStack"
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
@@ -56,32 +63,30 @@ const TabStack = (props) => {
               ) : (
                 <Entypo name="home" size={24} color={Theme.secondry} />
               )}
-             
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Projects"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.tab}>
               {focused ? (
-                <Ionicons  name="calendar" size={24} color={Theme.primary} />
+                <Ionicons name="calendar" size={24} color={Theme.primary} />
               ) : (
-                <Ionicons  name="calendar" size={24} color={Theme.secondry} />
+                <Ionicons name="calendar" size={24} color={Theme.secondry} />
               )}
-             
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Search"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
@@ -93,38 +98,32 @@ const TabStack = (props) => {
               }}
             >
               <View style={styles.footballContainer}>
-                {focused ? (
-                  <Feather name="search" size={24} color={Theme.secondry} />
-                ) : (
-                  <Feather name="search" size={24} color={Theme.secondry} />
-                )}
+                {focused ? <TabIcon /> : <TabIcon />}
               </View>
-             
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Favorites"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
           tabBarIcon: ({ focused }) => (
             <View style={styles.tab}>
               {focused ? (
-                <Ionicons  name="add-circle" size={24} color={Theme.primary} />
+                <Ionicons name="add-circle" size={24} color={Theme.primary} />
               ) : (
-                <Ionicons  name="add-circle" size={24} color={Theme.secondry} />
+                <Ionicons name="add-circle" size={24} color={Theme.secondry} />
               )}
-             
             </View>
           ),
         }}
       />
       <Tab.Screen
         name="Profile"
-        component={Home}
+        component={HomeStack}
         options={{
           tabBarShowLabel: false,
           headerShown: false,
@@ -138,11 +137,18 @@ const TabStack = (props) => {
                 }
               />
               {focused ? (
-                <MaterialCommunityIcons  name="message" size={24} color={Theme.primary} />
+                <MaterialCommunityIcons
+                  name="message"
+                  size={24}
+                  color={Theme.primary}
+                />
               ) : (
-                <MaterialCommunityIcons name="message" size={24} color="black" />
+                <MaterialCommunityIcons
+                  name="message"
+                  size={24}
+                  color="black"
+                />
               )}
-             
             </View>
           ),
         }}
@@ -204,9 +210,39 @@ function Navigation() {
           component={Tuto}
           options={{ headerShown: false }}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="TabStack"
           component={TabStack}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="PostDetails"
+          component={PostDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ParametresNotif"
+          component={ParametresNotif}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="ModifierProfil"
+          component={ModifierProfil}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Faq"
+          component={Faq}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Publier"
+          component={Publier}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="AutorisationParticiper"
+          component={AutorisationParticiper}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
@@ -245,8 +281,8 @@ const styles = StyleSheet.create({
     width: 55,
     height: 55,
     borderRadius: 55 / 2,
-    backgroundColor: Theme.primary,
-    marginTop: -30,
+    backgroundColor: Theme.white,
+    marginTop: -40,
     justifyContent: "center",
     alignItems: "center",
     paddingLeft: 1.5,

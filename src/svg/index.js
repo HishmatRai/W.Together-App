@@ -11,6 +11,8 @@ import Card3Icon from "./Card3Icon";
 import Card4Icon from "./Card4Icon";
 import TutoImg from "./TutoImg";
 import TutoSmallImage from "./TutoSmallImage";
+import TabIcon from "./TabIcon";
+import SendIcon from "./sendIcon";
 export {
   SelectImage,
   InscriptionParticulierImage,
@@ -24,5 +26,7 @@ export {
   Card3Icon,
   Card4Icon,
   TutoImg,
-  TutoSmallImage
+  TutoSmallImage,
+  TabIcon,
+  SendIcon
 };

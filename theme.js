@@ -8,5 +8,6 @@ export default {
   secondry: "#2E2E2E",
   white: "#fff",
   primaryLight:"#F6B396",
-  gray:"#F3F3F3"
+  gray:"#F3F3F3",
+  grayLight:"#919191"
 };
