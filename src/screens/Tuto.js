@@ -48,7 +48,7 @@ let Tuto = ({ navigation }) => {
           buttonColor={Theme.secondry}
           buttonText="C'est parti !"
           borderWidth="48%"
-          buttonHandler={() => alert("Comming Soon!")}
+          buttonHandler={() => navigation.navigate("TabStack")}
         />
       </View>
     </SafeAreaView>
